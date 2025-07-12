@@ -132,4 +132,19 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+import os
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 👈 this line must be set correctly
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                ...
+            ],
+        },
+    },
+]
+
 
