@@ -27,7 +27,7 @@ urlpatterns = [
     # path('Email-sender/' , send_email, name="send_email" ),
 
 
-    path('' , send_email, name="home",  name = "send_email"),
+    path('' , send_email, name = "send_email"),
 
     
     path('admin/', admin.site.urls),
