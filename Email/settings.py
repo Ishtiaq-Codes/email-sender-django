@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-5um#q9ppmmmt!apqa&tqouwha_&c4cah2g4zp+3^3zd17s!1e4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['email-sender.onrender.com']
+ALLOWED_HOSTS = ['web-production-b1e2.up.railway.app', '127.0.0.1', 'localhost']
+
 
 
 
