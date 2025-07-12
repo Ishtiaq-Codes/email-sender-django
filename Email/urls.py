@@ -24,10 +24,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 
-    path('Email-sender/' , send_email, name="send_email" ),
+    # path('Email-sender/' , send_email, name="send_email" ),
 
 
-    path('' , home, name="home" ),
+    path('' , send_email, name="home",  name = "send_email"),
 
     
     path('admin/', admin.site.urls),
