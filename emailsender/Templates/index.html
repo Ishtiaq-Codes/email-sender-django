@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Email</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(to right, #232526, #414345); 
+      min-height: 100vh;
+      padding: 3rem 1rem 2rem;
+      color: #f1f1f1;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .body-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .email-form {
+      background-color: #1e1e1e;
+      padding: 25px 30px;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 500px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .email-form h2 {
+      color: #fff;
+    }
+
+    .form-label {
+      color: #ccc;
+    }
+
+    .form-control {
+      background-color: #2c2c2c;
+      border: 1px solid #444;
+      color: #eee;
+    }
+
+    .form-control::placeholder {
+      color: #888;
+    }
+
+    .btn-primary {
+      background-color: #4e9bff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #3a85d6;
+    }
+
+    .alert-success {
+      background-color: #2d6a4f;
+      border: none;
+      color: #d4f4dd;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 576px) {
+      .email-form {
+        padding: 18px 20px;
+      }
+
+      .email-form h2 {
+        font-size: 1.2rem;
+      }
+
+      .form-control {
+        font-size: 0.95rem;
+        padding: 8px 10px;
+      }
+
+      button {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="body-wrapper">
+    <div class="email-form">
+      <h2 class="text-center mb-4">📧 Send a Custom Email</h2>
+
+      {% if message %}
+        <div class="alert alert-success text-center">{{ message }}</div>
+      {% endif %}
+
+
+
+
+      <div class="alert alert-info" role="alert" style="font-size: 0.95rem;">
+  🔐 <strong>Important:</strong> To send emails using your Gmail, you need to generate a
+  <a href="https://myaccount.google.com/apppasswords" target="_blank" class="text-blue fw-bold">16-character App Password</a>
+  from your Google account. Paste it in the field below.
+</div>
+
+
+
+
+
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label class="form-label">Your Name</label>
+          <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Your Gmail</label>
+          <input type="email" name="email" class="form-control" placeholder="e.g. your@gmail.com" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">App Password</label>
+          <input type="text" name="app_password" class="form-control" placeholder="16-character App Password" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Recipient Email</label>
+          <input type="email" name="to_email" class="form-control" placeholder="e.g. friend@gmail.com" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Subject</label>
+          <input type="text" name="subject" class="form-control" placeholder="Email Subject" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Message</label>
+          <textarea name="message" rows="5" class="form-control" placeholder="Your message here..." required></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Upload Your Logo (PNG/JPG)</label>
+          <input type="file" name="logo" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Attach a File</label>
+          <input type="file" name="attachment" class="form-control">
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">🚀 Send Email</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
