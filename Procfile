@@ -1,1 +1,2 @@
-web: gunicorn Email.wsgi
+web: gunicorn Email.wsgi:application --timeout 120
+
