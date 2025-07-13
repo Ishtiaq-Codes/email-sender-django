@@ -140,25 +140,48 @@ def send_email(request):
         msg["Subject"] = subject
         msg.attach(MIMEText(html_body, "html"))
 
-        #  for logo 
+        # #  for logo 
+        # if logo:
+        #     logo_data = logo.read()
+        #     image = MIMEImage(logo_data)
+        #     image.add_header("Content-ID", "<logo>")  #///////////////////////////////// match cid:logo in HTML using ai here
+        #     image.add_header("Content-Disposition", "inline")
+
+        #     msg.attach(image)
+
+        # #  file 
+        # if logo:
+        #     logo_data = logo.read()
+        #     image_subtype = logo.content_type.split('/')[1]  # jpeg
+        #     image = MIMEImage(logo_data, _subtype=image_subtype)
+        #     image.add_header("Content-ID", "<logo>")
+        #     image.add_header("Content-Disposition", "inline")
+        #     image.add_header("X-Attachment-Id", "logo")  #oooo
+        #     msg.attach(image)
+
+
+          # Attach logo image
         if logo:
             logo_data = logo.read()
-            image = MIMEImage(logo_data)
-            image.add_header("Content-ID", "<logo>")  #///////////////////////////////// match cid:logo in HTML using ai here
-            image.add_header("Content-Disposition", "inline")
-
-            msg.attach(image)
-
-        #  file 
-        if logo:
-            logo_data = logo.read()
-            image_subtype = logo.content_type.split('/')[1]  # jpeg
+            image_subtype = logo.content_type.split('/')[1]  # e.g. jpeg, png
             image = MIMEImage(logo_data, _subtype=image_subtype)
             image.add_header("Content-ID", "<logo>")
             image.add_header("Content-Disposition", "inline")
-            image.add_header("X-Attachment-Id", "logo")  #oooo
+            image.add_header("X-Attachment-Id", "logo")
             msg.attach(image)
 
+# Attach regular file
+        if file:
+            part = MIMEBase('application', 'octet-stream')
+            part.set_payload(file.read())
+            encoders.encode_base64(part)
+            part.add_header('Content-Disposition', f'attachment; filename="{file.name}"')
+            msg.attach(part)
+   
+
+
+
+         
 
         try:
             server = smtplib.SMTP("smtp.gmail.com", 587)
