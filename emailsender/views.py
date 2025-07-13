@@ -14,6 +14,15 @@ from email import encoders
 
 
 def send_email(request):
+    
+    MAX_FILE_SIZE = 2 * 1024 * 1024  # 2MB
+
+    if file and file.size > MAX_FILE_SIZE:
+      return render(request, "index.html", {"error": "❌ Attachment too large (Max 2MB allowed)"})
+
+    if logo and logo.size > MAX_FILE_SIZE:
+      return render(request, "index.html", {"error": "❌ Logo too large (Max 2MB allowed)"})
+
     if request.method == "POST":
         name = request.POST["name"]
         user_email = request.POST["email"]
