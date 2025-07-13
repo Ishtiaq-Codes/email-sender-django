@@ -283,27 +283,118 @@ def send_email(request):
             return render(request, "index.html", {"error": "❌ Logo too large (Max 2MB allowed)"})
 
         # Email HTML body
+
         html_body = f"""
-        <html>
-        <head>...your HTML remains unchanged...</head>
-        <body>
-        <div class="email-wrapper">
-        {'<img src="cid:logo" class="banner-logo" alt="Logo">' if logo else ''}
-        <div class="content">
-          <h2 class="greeting">Hi, I'm {name}</h2>
-          <p class="message">{message}</p>
-          <a href="mailto:{user_email}" class="reply-btn">Reply to {name}</a>
-          <div class="social-icons">
-            <a href="https://github.com/Ishtiaq-Codes"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"></a>
-          </div>
-          <div class="footer">
-            Sent via Django Email Sender • Built by Ishtiaq-Codes 
-          </div>
-        </div>
-        </div>
-        </body>
-        </html>
-        """
+<html>
+<head>
+  <style>
+    body {{
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }}
+    .email-wrapper {{
+      background-color: #fff;
+      padding: 0;
+      margin: 20px auto;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+    }}
+    .banner-logo {{
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      display: block;
+    }}
+    .content {{
+      padding: 20px;
+    }}
+    .greeting {{
+      font-size: 24px;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }}
+    .message {{
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 20px;
+    }}
+    .sent-time {{
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 20px;
+    }}
+    .reply-btn {{
+      background-color: #4e9bff;
+      color: white;
+      padding: 10px 18px;
+      text-decoration: none;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }}
+    .social-icons img {{
+      width: 30px;
+      margin: 0 8px;
+    }}
+    .footer {{
+      font-size: 13px;
+      color: #999;
+      margin-top: 25px;
+      padding-bottom: 20px;
+    }}
+
+    /* Dark Mode */
+    @media (prefers-color-scheme: dark) {{
+      body {{
+        background-color: #1e1e1e;
+      }}
+      .email-wrapper {{
+        background-color: #2c2c2c;
+        color: #eee;
+      }}
+      .message, .sent-time {{
+        color: #ccc;
+      }}
+      .reply-btn {{
+        background-color: #6ea8fe;
+      }}
+    }}
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    {'<img src="cid:logo" class="banner-logo" alt="Logo">' if logo else ''}
+    <div class="content">
+      <h2 class="greeting">Hi, I'm {name}</h2>
+      <p class="message">{message}</p>
+      <a href="mailto:{user_email}" class="reply-btn">Reply to {name}</a>
+
+      <div class="social-icons">
+        <a href="https://github.com/Ishtiaq-Codes"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"></a>
+      </div>
+
+      <div class="footer">
+        Sent via Django Email Sender • Built by Ishtiaq-Codes 
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+"""
+
+
+
+
+
+
+
+
 
         # Create email
         msg = MIMEMultipart()
