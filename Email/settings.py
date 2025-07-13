@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-5um#q9ppmmmt!apqa&tqouwha_&c4cah2g4zp+3^3zd17s!1e4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['web-production-55113.up.railway.app', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['web-production-7954b.up.railway.app', '127.0.0.1', 'localhost']
 
 
 
@@ -137,11 +137,14 @@ import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 👈 this line must be set correctly
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # this is correct ✅
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                ...
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
